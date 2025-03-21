@@ -12,8 +12,10 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Music,
 } from "lucide-react";
 import Image from "next/image";
+import { MusicPlayer } from "./components/MusicPlayer";
 
 const contentVariants = {
   hidden: { opacity: 0 },
@@ -92,6 +94,7 @@ export default function Home() {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -141,6 +144,9 @@ export default function Home() {
       onClick={handleClick}
       className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 relative overflow-hidden"
     >
+      {/* Background Music Player - using external source */}
+      <MusicPlayer audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" />
+
       {/* Animated background elements */}
       <motion.div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -457,6 +463,19 @@ export default function Home() {
                       </Button>
                     </motion.div>
                   </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9 }}
+                    className="w-full text-center mt-4 text-pink-600 text-sm flex items-center justify-center gap-2"
+                  >
+                    <Music className="w-4 h-4" />
+                    <p>
+                      Background music available! Use the music player in the
+                      bottom-right corner.
+                    </p>
+                  </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
